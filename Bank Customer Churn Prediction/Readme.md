@@ -1,36 +1,96 @@
-# Background and Context
-Businesses like banks that provide service have to worry about the problem of 'Churn' i.e. customers leaving and joining another service provider. It is important to understand which aspects of the service influence a customer's decision in this regard. Management can concentrate efforts on the improvement of service, keeping in mind these priorities.
+# Customer Churn Prediction App
 
-# Objective
-Given a Bank customer, build a neural network-based classifier that can determine whether they will leave or not in the next 6 months.
+## Background and Context
+Businesses like banks that provide services have to address the problem of customer churn, i.e., customers leaving and joining another service provider. Understanding the factors influencing customer churn helps management focus on service improvements and customer retention strategies.
 
-# Data Description
-The case study is from an open-source dataset from Kaggle. The dataset contains 10,000 sample points with 14 distinct features such as CustomerId, CreditScore, Geography, Gender, Age, Tenure, Balance, etc.
-  - CustomerId: Unique ID which is assigned to each customer
-  - Surname: Last name of the customer
-  - CreditScore: It defines the credit history of the customer.
-  - Geography: A customer’s location
-  - Gender: It defines the Gender of the customer
-  - Age: Age of the customer
-  - Tenure: Number of years for which the customer has been with the bank
-  - NumOfProducts: It refers to the number of products that a customer has purchased through the bank.
-  - Balance: Account balance
-  - HasCrCard: It is a categorical variable that decides whether the customer has a credit card or not.
-  - EstimatedSalary: Estimated salary
-  - isActiveMember: It is a categorical variable that decides whether the customer is an active member of the bank or not ( Active member in the sense, using bank products regularly, making transactions, etc )
-  - Exited: It is a categorical variable that decides whether the customer left the bank within six months or not. It can take two values
-    - 0=No ( Customer did not leave the bank )
-    - 1=Yes ( Customer left the bank )
+## Objective
+This project aims to deploy a neural network-based classifier that predicts whether a bank customer will leave within the next six months. The model is already trained, and the app is deployed as an Azure Web App for easy accessibility.
 
-# Preprocessing
-The gender information is mapped to numerical values (1 for Male, 0 for Female) to facilitate model training. Exploratory Data Analysis (EDA) is performed to visualize the distribution of data using count plots and distribution plots.
+## Data Description
+The dataset used is an open-source dataset from Kaggle containing 10,000 customer records with 14 distinct features:
+- **CustomerId**: Unique customer ID
+- **Surname**: Customer’s last name
+- **CreditScore**: Credit history score
+- **Geography**: Customer’s location (Germany, Spain, France)
+- **Gender**: Male or Female
+- **Age**: Customer’s age
+- **Tenure**: Number of years the customer has been with the bank
+- **NumOfProducts**: Number of products the customer has purchased from the bank
+- **Balance**: Customer’s account balance
+- **HasCrCard**: Whether the customer has a credit card (1 = Yes, 0 = No)
+- **EstimatedSalary**: Estimated salary of the customer
+- **isActiveMember**: Whether the customer actively uses bank products (1 = Yes, 0 = No)
+- **Exited**: Whether the customer left the bank (1 = Yes, 0 = No)
 
-# Model Training
-The dataset is split into training and testing sets, and three machine learning models are trained: Decision Tree, Random Forest, and Logistic Regression. The accuracy of each model is evaluated using the test set.
+## Preprocessing
+- Gender is mapped to numerical values (1 for Male, 0 for Female) to facilitate model training.
+- Exploratory Data Analysis (EDA) is performed using visualization tools like Seaborn and Matplotlib.
+- Standardization and scaling are applied to numerical features.
 
-# Note
-  - The models' performance metrics, including confusion matrices and classification reports, are provided in the Jupyter notebook.
-  - Make sure to have the necessary datasets in the specified file path.
-  - Adjustments to the dataset path or other parameters may be needed based on your local environment.
+## Model Training
+- The dataset is preprocessed and split into training and test sets.
+- A neural network-based classifier is trained using TensorFlow and Keras.
+- The trained model is serialized using Pickle for deployment.
 
-Feel free to explore and enhance the project further based on your requirements.
+## Installation and Deployment
+This application is deployed as an Azure Web App. Follow these steps to set up and deploy:
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-repository-url.git
+   cd your-repository
+   ```
+2. Install dependencies:
+   ```sh
+   pip install -r requirements.txt
+   ```
+3. Deploy the application on Azure:
+   - Create an Azure Web App.
+   - Upload the trained model (`model.pkl`).
+   - Configure the web service and environment.
+
+## Technologies Used
+The following technologies and libraries are used in this project:
+
+### Data Loading and Manipulation
+- `pandas`
+- `numpy`
+- `time`
+
+### Data Visualization
+- `matplotlib`
+- `seaborn`
+
+### Model Training and Preprocessing
+- `scikit-learn`
+  - `train_test_split`
+  - `StandardScaler`
+  - `MinMaxScaler`
+  - `confusion_matrix`, `classification_report`, `roc_auc_score`, etc.
+- `tensorflow`
+  - `keras.models.Sequential`
+  - `keras.layers.Dense, Dropout`
+
+### Handling Imbalanced Data
+- `imblearn.over_sampling.SMOTE`
+
+### Model Evaluation and Metrics
+- `accuracy_score`, `recall_score`, `precision_score`, `f1_score`
+- `roc_curve`, `roc_auc_score`
+
+### Saving the Model
+- `pickle`
+
+## Usage
+- The application is accessible via the Azure Web App URL:
+  ```
+  https://your-app-name.azurewebsites.net
+  ```
+- Users can enter customer details via a web form to receive a churn prediction result.
+
+## Notes
+- Ensure the necessary datasets and trained model (`model.pkl`) are correctly placed in the application directory.
+- Modify the dataset path and configurations based on your local setup if running the application locally.
+
+---
+
+For any issues or feature requests, feel free to open an issue on GitHub. 🚀
